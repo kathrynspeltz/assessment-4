@@ -1,25 +1,32 @@
 const db = [
     {
+        anId: 1,
         animalType: "Elephants",
         animalQuantity: 8,
     },
     {
+        anId: 2,
         animalType: "Tigers",
         animalQuantity: 4,
     }, {
+        anId: 3,
         animalType: "Horses",
         animalQuantity: 25,
     },
     {
+        anId: 4,
         animalType: "Dogs",
         animalQuantity: 8,
     },
     {
+        anId: 5,
         animalType: "Monkeys",
         animalQuantity: 2,
     }
 
 ]
+
+let anId = 6
 
 module.exports = {
 
@@ -46,10 +53,49 @@ module.exports = {
     },
 
     addAnimal: (req, res) => {
-        const { animalType, animalQuantity } = req.query
-
-        db.push({ animalType: animalType, animalQuantity: animalQuantity });
+        let { animalType, animalQuantity } = req.body
+        let newAn = {
+            anId,
+            animalType,
+            animalQuantity
+        }
+        db.push(newAn);
         res.status(200).send(db)
+        anId++
 
     },
+
+    deleteAnimal: (req, res) => {
+        const { id } = req.params;
+        const indexofAnimal = db.findIndex((animal) => animal.anId === +id);
+        if (indexofAnimal === -1) {
+            res.status(400).send("Animal doesn't exist");
+            return;
+        }
+        db.splice(indexofAnimal, 1);
+        res.status(200).send(db);
+    },
+
+
+    updateAnimal: (req, res) => {
+        let { id } = req.params
+        let { type } = req.body
+        let index = db.findIndex(elem => +elem.anId === +id)
+        console.log(res)
+        console.log(index)
+        console.log(id)
+        if (db[index].animalQuantity <= 1 && type === 'minus') {
+            db[index].animalQuantity = 0
+            res.status(200).send(db)
+        } else if (type === 'plus') {
+            db[index].animalQuantity += 1
+            res.status(200).send(db)
+        } else if (type === 'minus') {
+            db[index].animalQuantity -= 1
+            res.status(200).send(db)
+        } else {
+            res.sendStatus(400)
+        }
+    }
 }
+
