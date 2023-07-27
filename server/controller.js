@@ -1,3 +1,15 @@
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+    accessToken: '226d31c39023482084798cc418115a3c',
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+})
+
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
+
+
+
 const db = [
     {
         anId: 1,
@@ -36,7 +48,7 @@ module.exports = {
         // choose random compliment
         let randomIndex = Math.floor(Math.random() * compliments.length);
         let randomCompliment = compliments[randomIndex];
-        ollbar.info('Someone recieved a compliment')
+        rollbar.info('Someone recieved a compliment')
         res.status(200).send(randomCompliment);
     },
 
@@ -44,7 +56,7 @@ module.exports = {
         const fortunes = ["You will one day go to the moon!", "You are destined for great things!", "You will own 8 cats when you are old!", "Follow the way of the butterfly and you will achieve greatness!", "Avoid having snakes in your life, they may bite you."]
         let randomIndex = Math.floor(Math.random() * fortunes.length);
         let randomFortune = fortunes[randomIndex]
-        ollbar.critical('Someone got a fortune')
+        rollbar.critical('Someone got a fortune')
         res.status(200).send(randomFortune);
 
     },
