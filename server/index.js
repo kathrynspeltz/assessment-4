@@ -6,6 +6,7 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
+app.use(express.static("client"))
 
 // include and initialize the rollbar library with your access token
 var Rollbar = require('rollbar')
