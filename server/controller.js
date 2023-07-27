@@ -36,7 +36,7 @@ module.exports = {
         // choose random compliment
         let randomIndex = Math.floor(Math.random() * compliments.length);
         let randomCompliment = compliments[randomIndex];
-
+        ollbar.info('Someone recieved a compliment')
         res.status(200).send(randomCompliment);
     },
 
@@ -44,11 +44,13 @@ module.exports = {
         const fortunes = ["You will one day go to the moon!", "You are destined for great things!", "You will own 8 cats when you are old!", "Follow the way of the butterfly and you will achieve greatness!", "Avoid having snakes in your life, they may bite you."]
         let randomIndex = Math.floor(Math.random() * fortunes.length);
         let randomFortune = fortunes[randomIndex]
+        ollbar.critical('Someone got a fortune')
         res.status(200).send(randomFortune);
 
     },
 
     getAnimals: (req, res) => {
+        rollbar.log('Hello animals!')
         res.status(200).send(db)
     },
 
@@ -73,6 +75,7 @@ module.exports = {
             return;
         }
         db.splice(indexofAnimal, 1);
+        rollbar.warning('Someone deleted an animal')
         res.status(200).send(db);
     },
 
