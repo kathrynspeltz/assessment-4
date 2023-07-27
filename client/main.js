@@ -6,7 +6,7 @@ const addAnimalForm = document.getElementById('addAnimalForm')
 // const addAnimalType = document.getElementById('addAnimalType')
 
 const getCompliment = () => {
-    axios.get("http://localhost:4000/api/compliment/")
+    axios.get("http://18.119.1.84/api/compliment/")
         .then(res => {
             const data = res.data;
             alert(data);
@@ -44,25 +44,25 @@ const addAnimal = (an) => {
         animalType: addAnimalType.value,
         animalQuantity: addAnimalAmount.value,
     };
-    axios.post("http://localhost:4000/api/animals/", body).then(res => printAnimalsDB(res.data))
+    axios.post("http://18.119.1.84/api/animals/", body).then(res => printAnimalsDB(res.data))
     addAnimalType.value = ""
     addAnimalAmount.value = ""
 }
 
 const getAnimals = () => {
-    axios.get("http://localhost:4000/api/animals/").then(res => printAnimalsDB(res.data))
+    axios.get("http://18.119.1.84/api/animals/").then(res => printAnimalsDB(res.data))
 }
 
 const getFortune = () => {
-    axios.get("http://localhost:4000/api/fortune/")
+    axios.get("http://18.119.1.84/api/fortune/")
         .then(res => printFortune(res.data));
 };
 
 const deleteAnimal = (anId) =>
-    axios.delete(`http://localhost:4000/api/animals/${anId}`).then(res => printAnimalsDB(res.data)).catch((err) => console.error(err));
+    axios.delete(`http://18.119.1.84/api/animals/${anId}`).then(res => printAnimalsDB(res.data)).catch((err) => console.error(err));
 
 const updateAnimal = (anId, type) =>
-    axios.put(`http://localhost:4000/api/animals/${anId}`, { type }).then(res => printAnimalsDB(res.data)).catch((err) => console.error(err))
+    axios.put(`http://18.119.1.84/api/animals/${anId}`, { type }).then(res => printAnimalsDB(res.data)).catch((err) => console.error(err))
 
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
