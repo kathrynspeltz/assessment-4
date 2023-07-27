@@ -7,6 +7,18 @@ app.use(cors());
 
 app.use(express.json());
 
+// include and initialize the rollbar library with your access token
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+    accessToken: '226d31c39023482084798cc418115a3c',
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+})
+
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
+
+
 const { getCompliment, getFortune, addAnimal, getAnimals, deleteAnimal, updateAnimal } = require('./controller')
 
 app.get("/api/compliment", getCompliment);
